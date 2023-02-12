@@ -9,7 +9,7 @@ class ImgProvider extends GetConnect {
       if (map is Map<String, dynamic>) return Img.fromJson(map);
       if (map is List) return map.map((item) => Img.fromJson(item)).toList();
     };
-    httpClient.baseUrl = 'YOUR-API-URL';
+    httpClient.baseUrl = 'https://jsonplaceholder.typicode.com/photos';
   }
 
   Future<Img?> getImg(int id) async {
