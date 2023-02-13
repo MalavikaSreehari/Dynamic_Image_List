@@ -224,7 +224,7 @@ class RegisterView extends GetView<RegisterController> {
                     shape: BoxShape.circle,
                   ),
                   child: IconButton(onPressed: () {
-                    Get.to(HomeView(),);
+                    Get.to(() => HomeView(),);
                     Get.put(HomeController());
                     
                   },
