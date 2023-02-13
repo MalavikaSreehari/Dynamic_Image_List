@@ -1,22 +1,41 @@
-class Img {
-  final String title, url, thumbnailUrl;
-  final int id, albumId;
+// To parse this JSON data, do
+//
+//     final imageModel = imageModelFromJson(jsonString);
 
-  Img({
-    required this.title,
-    required this.url,
-    required this.thumbnailUrl,
-    required this.id,
-    required this.albumId,
-  });
+import 'dart:convert';
 
-  factory Img.fromJson(Map<String, dynamic> json) {
-    return Img(
-      title: json['title'],
-      url: json['url'],
-      thumbnailUrl: json['thumbnailUrl'],
-      id: json['id'],
-      albumId: json['albumId'],
+List<ImageModel> imageModelFromJson(String str) => List<ImageModel>.from(json.decode(str).map((x) => ImageModel.fromJson(x)));
+
+String imageModelToJson(List<ImageModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+
+class ImageModel {
+    ImageModel({
+        required this.albumId,
+        required this.id,
+        required this.title,
+        required this.url,
+        required this.thumbnailUrl,
+    });
+
+    int albumId;
+    int id;
+    String title;
+    String url;
+    String thumbnailUrl;
+
+    factory ImageModel.fromJson(Map<String, dynamic> json) => ImageModel(
+        albumId: json["albumId"],
+        id: json["id"],
+        title: json["title"],
+        url: json["url"],
+        thumbnailUrl: json["thumbnailUrl"],
     );
-  }
+
+    Map<String, dynamic> toJson() => {
+        "albumId": albumId,
+        "id": id,
+        "title": title,
+        "url": url,
+        "thumbnailUrl": thumbnailUrl,
+    };
 }

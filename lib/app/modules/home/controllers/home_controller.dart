@@ -1,57 +1,27 @@
-import 'dart:convert';
-
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/state_manager.dart';
+import 'package:malavika_app/app/modules/api/posts_provider.dart';
 import 'package:malavika_app/app/data/models/img.dart';
-import 'package:http/http.dart' as http;
 
 class HomeController extends GetxController {
-  var imgList = <Img>[].obs;
-  var isLoading = true.obs;
-
   @override
-  void onInit() {
-    super.onInit();
-    fetchAlbumData();
+  void onReady() {
+    super.onReady();
+    getPosts();
   }
 
-  Future<void> fetchAlbumData() async {
-    final response = await http
-        .get(Uri.parse('https://jsonplaceholder.typicode.com/photos/3'));
+  var posts = <ImageModel>[].obs;
+  var loading = false.obs;
 
-    if (response.statusCode == 200) {
-      Img _img = Img.fromJson(jsonDecode(response.body));
+  PostsProvider _provider = PostsProvider();
 
-      imgList.add(
-        Img(
-          title: _img.title,
-          url: _img.url,
-          thumbnailUrl: _img.thumbnailUrl,
-          id: _img.id,
-          albumId: _img.albumId,
-        ),
-      );
-
-      isLoading.value = false;
-      update();
-    } else {
-      Get.snackbar('Error Loading data!',
-          'Sever responded: ${response.statusCode}:${response.reasonPhrase.toString()}');
+  getPosts() async {
+    loading(true);
+    var response = await _provider.getPosts();
+    if (!response.status.hasError) {
+      posts.value = imageModelFromJson(response.bodyString!);
     }
+    loading(false);
   }
 }
-  // final count = 0.obs;
-  
-  
-
-  // @override
-  // void onReady() {
-  //   super.onReady();
-  // }
-
-  // @override
-  // void onClose() {
-  //   super.onClose();
-  // }
-
-  // void increment() => count.value++;
-// }

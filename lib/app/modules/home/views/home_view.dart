@@ -1,39 +1,35 @@
-
-
 import 'package:flutter/material.dart';
-import 'package:get/instance_manager.dart';
 import 'package:get/get.dart';
+import 'package:malavika_app/app/modules/home/controllers/home_controller.dart';
 
-
-import '../controllers/home_controller.dart';
-
-class HomeView extends GetView<HomeController> {
-   HomeView({Key? key}) : super(key: key);
-  
-  
+class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final _controller = Get.find<HomeController>();
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-      ),
-      
-      body: Obx(
-        (() =>_controller.isLoading.value? const CircularProgressIndicator():Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text('ImageID: ${_controller.imgList[0].albumId}'),
-              Text('ID: ${_controller.imgList[0].id}'),
-              Text('Title: ${_controller.imgList[0].title}'),
-              Image.network(_controller.imgList[0].thumbnailUrl)
-            ],
-          ),
-      
-        )),
-      ),
-    );
+    return GetX<HomeController>(
+        init: HomeController(),
+        builder: (controller) {
+          return Scaffold(
+            appBar: AppBar(
+              title: Text('Posts'),
+            ),
+            body: controller.loading.value
+                ? Center(child: CircularProgressIndicator())
+                : ListView(
+                    children: controller.posts
+                        .map<Widget>((post) => Container(
+                child: Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Column(
+                    children: [
+                      Text(post.title),
+                      Image.network("${post.url}")
+                    ],
+                  ),
+                ),
+              ))
+                        .toList(),
+                  ),
+          );
+        });
   }
 }
