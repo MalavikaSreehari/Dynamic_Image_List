@@ -193,7 +193,7 @@ class RegisterView extends GetView<RegisterController> {
                           SizedBox(
                             width: 10,
                           ),
-                          Text('Login with Google',
+                          Text('Sign in with Google',
                           style: TextStyle(
                             color: Colors.white,
                             fontFamily: 'Open Sans'
