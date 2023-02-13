@@ -2,11 +2,11 @@
 //
 //     final img = imgFromJson(jsonString);
 
-import 'dart:convert';
+// import 'dart:convert';
 
-List<Img> imgFromJson(String str) => List<Img>.from(json.decode(str).map((x) => Img.fromJson(x)));
+// List<Img> imgFromJson(String str) => List<Img>.from(json.decode(str).map((x) => Img.fromJson(x)));
 
-String imgToJson(List<Img> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+// String imgToJson(List<Img> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class Img {
     Img({
@@ -31,11 +31,11 @@ class Img {
         thumbnailUrl: json["thumbnailUrl"],
     );
 
-    Map<String, dynamic> toJson() => {
-        "albumId": albumId,
-        "id": id,
-        "title": title,
-        "url": url,
-        "thumbnailUrl": thumbnailUrl,
-    };
+    // Map<String, dynamic> toJson() => {
+    //     "albumId": albumId,
+    //     "id": id,
+    //     "title": title,
+    //     "url": url,
+    //     "thumbnailUrl": thumbnailUrl,
+//     };
 }

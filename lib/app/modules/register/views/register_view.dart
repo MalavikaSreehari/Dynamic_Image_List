@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:malavika_app/app/modules/home/controllers/home_controller.dart';
+import 'package:malavika_app/app/modules/home/views/home_view.dart';
 
 import '../controllers/register_controller.dart';
 
@@ -222,6 +224,8 @@ class RegisterView extends GetView<RegisterController> {
                     shape: BoxShape.circle,
                   ),
                   child: IconButton(onPressed: () {
+                    Get.to(HomeView(),);
+                    Get.put(HomeController());
                     
                   },
                   icon: const Icon(Icons.arrow_forward_ios),

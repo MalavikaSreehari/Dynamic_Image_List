@@ -24,7 +24,8 @@ class HomeController extends GetxController {
 
       imgList.add(Img(albumId: _imgModel.albumId, id: _imgModel.id, title: _imgModel.title, url: _imgModel.url, thumbnailUrl: _imgModel.thumbnailUrl),);
 
-      isLoading.value = true;
+      isLoading.value = false;
+      update();
     }
     else{
       Get.snackbar('Error loading data!', 'Sever responded: ${response.statusCode}:${response.reasonPhrase.toString()}');

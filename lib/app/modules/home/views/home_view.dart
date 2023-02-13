@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/instance_manager.dart';
 import 'package:get/get.dart';
-import 'package:malavika_app/app/data/services/remote_services.dart';
+
 
 import '../controllers/home_controller.dart';
 
@@ -21,7 +21,7 @@ class HomeView extends GetView<HomeController> {
       ),
       
       body: Obx(
-        (() =>_controller.isLoading.value? const CircularProgressIndicator():  Center(
+        (() =>_controller.isLoading.value? const CircularProgressIndicator():Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
